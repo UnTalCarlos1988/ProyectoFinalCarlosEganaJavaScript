@@ -4,38 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style4.css">
-    <title>Gestor de tareas con días festivos</title>
+    <title>Gestor de Tareas Diarias</title>
 </head>
 <body>
-    <h1>Gestor de tareas</h1>
-    
-    <form id="tareaForm">
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" required>
-
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" required></textarea>
-
-        <label for="hora">Hora:</label>
-        <input type="time" id="hora" required>
-
-        <label for="pais">País:</label>
+    <header>
+        <h1>Gestor de Tareas Diarias</h1>
+        <label for="pais">Selecciona tu país:</label>
         <select id="pais">
             <option value="CL">Chile</option>
             <option value="AR">Argentina</option>
-            
         </select>
+    </header>
 
-        <button type="submit">Agregar Tarea</button>
-    </form>
+    <section id="calendario"></section>
 
-    <div id="calendario"></div>
+    <section id="tareas">
+        <h2>Tareas Pendientes</h2>
+        <ul id="listaTareas"></ul>
+        <p id="totalTareas">Total de tareas: 0</p>
+        <p id="mensaje"></p>
+    </section>
 
-    <ul id="listaTareas"></ul>
-    <p id="totalTareas">Total de tareas: 0</p>
-    <h2 id="mensaje"></h2>
-    
+    <section id="formTarea">
+        <h2>Añadir Tarea</h2>
+        <form id="tareaForm">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" required>
+
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora" required>
+
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" required>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" required></textarea>
+
+            <button type="submit">Agregar Tarea</button>
+        </form>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-calendar"></script>
+    <script src="main4.js"></script>
 </body>
-<script src="main4.js"></script>
 </html>
-

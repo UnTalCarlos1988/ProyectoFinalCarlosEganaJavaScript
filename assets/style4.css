@@ -1,23 +1,47 @@
-#calendario {
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center;
-    margin-top: 20px;
+    flex-direction: column;
+    align-items: center;
 }
 
-#calendario span {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    border: 1px solid #ccc;
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
     text-align: center;
-    line-height: 30px;
-    cursor: pointer;
 }
 
-#calendario span.festivo {
-    background-color: #ff8080; 
-    color: white;
+select {
+    margin-left: 1rem;
+}
+
+#calendario {
+    width: 80%;
+    margin: 1rem 0;
+}
+
+#tareas, #formTarea {
+    width: 80%;
+    margin-bottom: 2rem;
+}
+
+#tareas h2, #formTarea h2 {
+    border-bottom: 1px solid #333;
+}
+
+#listaTareas {
+    list-style: none;
+    padding: 0;
+}
+
+#listaTareas li {
+    margin: 1rem 0;
+}
+
+#mensaje {
     font-weight: bold;
+    color: #ff0000;
 }
