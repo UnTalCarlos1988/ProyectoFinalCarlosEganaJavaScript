@@ -12,9 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         calendario.innerHTML = "";
         const countryCode = paisSelect.value;
 
-        // Obtener días festivos
         obtenerDiasFestivos(countryCode).then(function (holidays) {
-            // Crear un array de eventos para Simple Calendar
             const events = holidays.map(function (holiday) {
                 return {
                     startDate: `${holiday.date}T00:00:00`,
@@ -23,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 };
             });
 
-            // Agregar eventos de tareas a la lista
             tareas.forEach(function (tarea) {
                 const fechaTarea = new Date(`${tarea.fecha}T${tarea.hora}:00`);
                 events.push({
@@ -33,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             });
 
-            // Configurar Simple Calendar
             const calendar = new SimpleCalendar({
                 container: "#calendario",
                 month: new Date().getMonth() + 1,
@@ -43,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 disableTimezone: true,
                 eventsData: events,
                 onClickDate: function (date) {
-                    // Cuando se hace clic en una fecha, mostrar las tareas correspondientes
                     const tareasFecha = tareas.filter(function (tarea) {
                         const fechaTarea = new Date(`${tarea.fecha}T${tarea.hora}:00`);
                         return fechaTarea.toISOString().split('T')[0] === date;
@@ -153,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Inicializar la aplicación
+   
     actualizarCalendario();
     actualizarListaTareas();
 });
