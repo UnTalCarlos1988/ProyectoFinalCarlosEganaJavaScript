@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Proyecto final/assets/style4.css">
+    <title>Gestor de tareas con días festivos</title>
+</head>
+<body>
+    <h1>Gestor de tareas</h1>
+    
+    <form id="tareaForm">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" required>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" required></textarea>
+
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" required>
+
+        <label for="pais">País:</label>
+        <select id="pais">
+            <option value="CL">Chile</option>
+            <option value="AR">Argentina</option>
+            
+        </select>
+
+        <button type="submit">Agregar Tarea</button>
+    </form>
+
+    <div id="calendario"></div>
+
+    <ul id="listaTareas"></ul>
+    <p id="totalTareas">Total de tareas: 0</p>
+    <h2 id="mensaje"></h2>
+    
+</body>
+<script src="main4.js"></script>
+</html>
+
