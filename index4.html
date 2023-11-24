@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href= "https://unpkg.com/simple-calendar/dist/simple-calendar.css" />
     <link rel="stylesheet" href="./assets/style4.css" />
     
     <title>Gestor de Tareas Diarias</title>
@@ -18,7 +17,10 @@
         </select>
     </header>
 
-    <div class="calendario-container" id="calendario"></div>
+    <div id="diasFestivos">
+        <h3>Días festivos del mes:</h3>
+        <ul id="festivosLista"></ul>
+    </div>
 
     <section id="formTarea">
         <h2>Añadir Tarea</h2>
@@ -46,11 +48,7 @@
         <p id="mensaje"></p>
     </section>
 
-    
-     
-    <script src="https://unpkg.com/simple-calendar"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-calendar"></script>
     <script src="./main4.js"></script>
 </body>
 </html>
