@@ -1,11 +1,10 @@
-document.addEventListener("DOMContentLoaded", async function () {
-    const tareaForm = document.getElementById("tareaForm");
-    const listaTareas = document.getElementById("listaTareas");
-    const totalTareas = document.getElementById("totalTareas");
-    const mensajeH2 = document.getElementById("mensaje");
-    const paisSelect = document.getElementById("pais");
-    
-    const festivosLista = document.getElementById("festivosLista");
+$(document).ready(async function () {
+    const tareaForm = $("#tareaForm");
+    const listaTareas = $("#listaTareas");
+    const totalTareas = $("#totalTareas");
+    const mensajeH2 = $("#mensaje");
+    const paisSelect = $("#pais");
+    const festivosLista = $("#festivosLista");
 
     const tareas = JSON.parse(localStorage.getItem("tareas")) || [];
 
@@ -22,9 +21,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     async function actualizarDiasFestivos() {
-        festivosLista.innerHTML = "";
+        festivosLista.empty();
 
-        const countryCode = paisSelect.value;
+        const countryCode = paisSelect.val();
         const year = new Date().getFullYear();
         const month = new Date().getMonth() + 1;
 
@@ -32,49 +31,47 @@ document.addEventListener("DOMContentLoaded", async function () {
             const holidays = await obtenerDiasFestivos(year, month, countryCode);
 
             if (holidays.length > 0) {
-                festivosLista.innerHTML = "<ul>";
-                holidays.forEach(holiday => {
-                    festivosLista.innerHTML += `<li>${holiday.date}: ${holiday.name}</li>`;
-                });
-                festivosLista.innerHTML += "</ul>";
+                const festivosHtml = holidays.map(holiday => `<li>${holiday.date}: ${holiday.name}</li>`).join('');
+                festivosLista.html(`<ul>${festivosHtml}</ul>`);
             } else {
-                festivosLista.innerHTML = "<p>No hay días festivos para el mes en curso.</p>";
+                festivosLista.html("<p>No hay días festivos para el mes en curso.</p>");
             }
         } catch (error) {
             mostrarError("Error al obtener días festivos: " + error.message);
         }
     }
+    await actualizarDiasFestivos();
 
     function actualizarListaTareas() {
-        listaTareas.innerHTML = "";
+        listaTareas.empty();
 
         tareas.forEach(function (tarea) {
-            const tareaItem = document.createElement("li");
-            tareaItem.innerHTML = `<strong>${tarea.titulo}</strong><br>${tarea.descripcion}<br>Fecha: ${tarea.fecha}<br>Hora: ${tarea.hora}`;
+            const tareaItem = $(document.createElement("li"));
+            tareaItem.html(`<strong>${tarea.titulo}</strong><br>${tarea.descripcion}<br>Fecha: ${tarea.fecha}<br>Hora: ${tarea.hora}`);
 
-            const botonCompletar = document.createElement("button");
-            botonCompletar.textContent = "Completar";
-            botonCompletar.addEventListener("click", function () {
+            const botonCompletar = $(document.createElement("button"));
+            botonCompletar.text("Completar");
+            botonCompletar.on("click", function () {
                 completarTarea(tarea);
             });
 
-            tareaItem.appendChild(botonCompletar);
-            listaTareas.appendChild(tareaItem);
+            tareaItem.append(botonCompletar);
+            listaTareas.append(tareaItem);
         });
 
-        totalTareas.textContent = tareas.length;
+        totalTareas.text(tareas.length);
 
         if (tareas.length === 0) {
-            mensajeH2.textContent = "No hay tareas pendientes";
+            mensajeH2.text("No hay tareas pendientes");
         } else {
-            mensajeH2.textContent = "";
+            mensajeH2.text("");
         }
     }
 
     function mostrarError(mensaje) {
-        mensajeH2.textContent = mensaje;
+        mensajeH2.text(mensaje);
         setTimeout(() => {
-            mensajeH2.textContent = "";
+            mensajeH2.text("");
         }, 5000);
     }
 
@@ -93,14 +90,14 @@ document.addEventListener("DOMContentLoaded", async function () {
         actualizarListaTareas();
     }
 
-    tareaForm.addEventListener("submit", function (event) {
+    tareaForm.on("submit", function (event) {
         event.preventDefault();
 
         try {
-            const fecha = document.getElementById("fecha").value;
-            const hora = document.getElementById("hora").value;
-            const titulo = document.getElementById("titulo").value;
-            const descripcion = document.getElementById("descripcion").value;
+            const fecha = $("#fecha").val();
+            const hora = $("#hora").val();
+            const titulo = $("#titulo").val();
+            const descripcion = $("#descripcion").val();
 
             if (!fecha || !hora || !titulo || !descripcion) {
                 throw new Error("Todos los campos deben estar llenos");
@@ -115,7 +112,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
             tareas.push(tarea);
             localStorage.setItem("tareas", JSON.stringify(tareas));
-            tareaForm.reset();
+            tareaForm[0].reset();
 
             actualizarDiasFestivos();
             actualizarListaTareas();
